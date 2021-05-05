@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafíos CoderHouse</title>
+
+    <style>
+        pre {
+            font-variant: normal;
+            font-weight: bold;
+        }
+        
+        h2 {
+            color: black;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+        }
+        
+        pre {
+            color: black;
+        }
+        
+        div pre,
+        h4 {
+            color: gray;
+            /* display: none; */
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>Desafío 1</h2>
+    <pre>
+        1- Declarar una función constructora llamada Usuario que reciba: 
+            nombre (string)
+            apellido (string)
+            libros (array de objetos)
+            mascotas (array de strings). 
+        
+        Implementar las propiedades instancia desde los valores recibidos como argumento y los siguientes
+        métodos en su prototipo: 
+        
+            getFullName: debe retornar un string con el nombre y apellido del usuario (utilizar template string) 
+            addMascota: debe agregar una mascota (mascota) al arreglo de mascotas del usuario. No debe retornar nada.
+            getMascotas: debe retornar la cantidad de mascotas que tiene el usuario
+    </pre>
+
+    <script>
+        function Usuario(nombre, apellido, mascotas, libros) {
+            this.nombre = nombre
+            this.apellido = apellido
+            this.mascotas = mascotas
+            this.libros = libros
+        }
+
+        Usuario.prototype.getFullName = function() {
+            return `${this.nombre} ${this.apellido}`
+        }
+
+        Usuario.prototype.addMascota = function(mascota) {
+            this.mascotas.push(mascota)
+        }
+
+        Usuario.prototype.getMascotas = function() {
+            return this.mascotas.length
+        }
+
+        Usuario.prototype.addBook = function(nombre, autor) {
+            this.libros.push({
+                nombre: nombre,
+                autor: autor
+            })
+        }
+
+        Usuario.prototype.getBooks = function() {
+            let nombres = []
+            for (let i = 0; i < this.libros.length; i++) {
+                nombres.push(this.libros[i].nombre)
+            }
+            return nombres
+        }
+
+        let nombre = 'Gimena'
+        let apellido = 'Maza'
+        let mascotas = []
+        let libros = []
+        let usuario = new Usuario(nombre, apellido, mascotas, libros)
+
+        usuario.addMascota('Gata que se llama Aleteia')
+        usuario.addMascota('Gata que se llama Maitreia')
+        usuario.addBook('El hombre en busca del sentido', 'Victor Frankl')
+        usuario.addBook('Crónicas del ángel gris', 'Aljandro Dolina')
+
+
+        console.log(usuario.getFullName())
+        console.log(usuario.getMascotas())
+        console.log(usuario.getBooks())
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafíos CoderHouse</title>
+
+    <style>
+        pre {
+            font-variant: normal;
+            font-weight: bold;
+        }
+        
+        h2 {
+            color: black;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+        }
+        
+        pre {
+            color: black;
+        }
+        
+        div pre,
+        h4 {
+            color: gray;
+            /* display: none; */
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>Desafío 1</h2>
+    <pre>
+        2- Realizar la misma consigna que el punto 1 utilizando el constructor class de ES6
+    </pre>
+
+    <script>
+        class Usuario {
+            constructor(nombre, apellido, mascotas, libros) {
+                this.nombre = nombre
+                this.apellido = apellido
+                this.mascotas = mascotas
+                this.libros = libros
+            }
+
+            getFullName() {
+                return `${this.nombre} ${this.apellido}`
+            }
+
+            addMascota(mascota) {
+                this.mascotas.push(mascota)
+            }
+
+            getMascotas() {
+                return this.mascotas.length
+            }
+
+            addBook(nombre, autor) {
+                this.libros.push({
+                    nombre: nombre,
+                    autor: autor
+                })
+            }
+
+            getBooks() {
+                let nombres = []
+                for (let i = 0; i < this.libros.length; i++) {
+                    nombres.push(this.libros[i].nombre)
+                }
+                return nombres
+            }
+
+        }
+
+        let nombre = 'Gimena'
+        let apellido = 'Maza'
+        let mascotas = []
+        let libros = []
+        let usuario = new Usuario(nombre, apellido, mascotas, libros);
+
+        usuario.addMascota('Gata que se llama Aleteia')
+        usuario.addMascota('Gata que se llama Maitreia')
+        usuario.addBook('El hombre en busca del sentido', 'Victor Frankl')
+        usuario.addBook('Crónicas del ángel gris', 'Aljandro Dolina')
+
+
+        console.log(usuario.getFullName())
+        console.log(usuario.getMascotas())
+        console.log(usuario.getBooks())
+    </script>
+
+</body>
+
+</html>
