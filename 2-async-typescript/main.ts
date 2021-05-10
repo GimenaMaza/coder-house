@@ -9,19 +9,28 @@ Los cálculos habilitados estarán definidos en archivos separados empleado clas
 Este debe ser un proyecto que utilice typescript, async await, funciones flecha y tipado en todos sus módulos.
 */
 
-async function operacion(a: number, b: number, operacion: string) : Promise <number> {
-    // importar el modulo con await import() y ,realizar la operacion
-    let modulo = await import(`./${operacion}`);
-    let operacionModulo = new modulo.Suma(a,b);
-    let resultado = operacionModulo.resultado();
-    return Promise.resolve(resultado);
+async function operacion(a: number, b: number, operacion: string){
+   
+    try {
+        let Modulo = await import(`./${operacion}`);
+        let instanciaModulo = new Modulo.default(a, b);
+        let resultado = instanciaModulo.resultado();
+        return Promise.resolve(resultado);
+    } catch (error) {
+        console.error('Ocurrió un error');
+    }
+
+
+
+
 }
 
 
 // ejecuto pasando los operandos y el tipo de operacion
-async function operaciones(){
+async function operaciones() {
     console.log(await operacion(16, 6, 'suma'));
-    /* console.log(await operacion(16, 6, 'resta')); */
+    console.log(await operacion(16, 6, 'resta'));
+    console.log(await operacion(16, 6, 'restar'));
 }
 
 operaciones();

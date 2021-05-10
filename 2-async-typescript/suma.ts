@@ -1,4 +1,4 @@
-export class Suma {
+export default class Suma {
 
     private sumando1: number;
     private sumando2: number;

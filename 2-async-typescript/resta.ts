@@ -1,4 +1,4 @@
-export class Resta {
+export default  class Resta {
 
     private minuendo: number;
     private sustraendo: number;

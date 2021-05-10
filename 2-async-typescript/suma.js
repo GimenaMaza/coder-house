@@ -1,6 +1,5 @@
 "use strict";
 exports.__esModule = true;
-exports.Suma = void 0;
 var Suma = /** @class */ (function () {
     function Suma(a, b) {
         var _this = this;
@@ -12,4 +11,4 @@ var Suma = /** @class */ (function () {
     }
     return Suma;
 }());
-exports.Suma = Suma;
+exports["default"] = Suma;

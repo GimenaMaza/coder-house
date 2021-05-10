@@ -1,6 +1,5 @@
 "use strict";
 exports.__esModule = true;
-exports.Resta = void 0;
 var Resta = /** @class */ (function () {
     function Resta(a, b) {
         var _this = this;
@@ -12,4 +11,4 @@ var Resta = /** @class */ (function () {
     }
     return Resta;
 }());
-exports.Resta = Resta;
+exports["default"] = Resta;
