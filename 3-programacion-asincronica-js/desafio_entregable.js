@@ -21,23 +21,26 @@
 const esperar = ret => { for (let i = 0; i < ret * 3e6; i++); }
 
 // muestra las palabras en orden a partir de un texto
-const mostrarPalabras = (texto, tiempo, cantidadPalabras, callback) => {
+const mostrarPalabras = (texto, tiempo = 1000, cantidadPalabras, callback) => {
     //Convierto el parametro texto a un array
-    let arrayPalabras = texto.split(' ');
 
+    let arrayPalabras = texto.split(' ');
+    let total = cantidadPalabras + arrayPalabras.length;
     for (let i = 0; i < arrayPalabras.length; i++) {
         //muestro cada elemento del array
         console.log(arrayPalabras[i]);
-        totalPalabras = cantidadPalabras++;
         esperar(tiempo);
+
     }
-    callback();
+
+    callback(null, total);
 }
+
 
 let texto1 = 'primer texto';
 let texto2 = 'curso backend de coderhouse';
 let texto3 = 'probando llamadas asincronas en nodejs';
-const tiempo = 500;
+let tiempo = 500;
 
 mostrarPalabras(texto1, tiempo, 0, (error, totalPalabras) => {
     mostrarPalabras(texto2, tiempo, totalPalabras, (error, totalPalabras) => {
