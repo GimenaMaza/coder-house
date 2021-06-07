@@ -1,9 +1,22 @@
 class Productos {
     constructor() {
-        // incializar variables
+        this.productos = [];
     }
 
-    // agregar los metodos requeridos
+    guardar(title, price, thumbnail) {
+        try {
+            this.productos.push({
+                id: productos.length + 1,
+                title: title,
+                price: price,
+                thumbnail: thumbnail
+            });
+
+
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 // exporto una instancia de la clase
