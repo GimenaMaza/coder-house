@@ -17,6 +17,10 @@ class Productos {
             throw error;
         }
     }
+
+    getProductos() {
+        return this.productos;
+    }
 }
 
 // exporto una instancia de la clase
