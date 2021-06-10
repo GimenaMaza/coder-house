@@ -15,12 +15,22 @@ app.post('/api/productos/guardar', (req, res) => {
 app.get('/api/productos/listar/:id', (req, res) => {
     let id = req.params.id;
     let producto = productos.listar(id);
-    res.json(producto)
+    if (producto == null) {
+        res.send({ error: "Producto no encontrado" })
+    } else {
+        res.json(producto)
+    }
+
 })
 
 app.get('/api/productos/listar', (req, res) => {
         let listado = productos.getProductos();
-        return res.json(listado);
+        if (listado.length === 0) {
+            res.send({ error: "No hay productos cargados" })
+        } else {
+            return res.json(listado);
+        }
+
 
     })
     // pongo a escuchar el servidor en el puerto indicado
