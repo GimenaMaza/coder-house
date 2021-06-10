@@ -1,5 +1,5 @@
 const express = require('express');
-const productos = require('./api/productos');
+const Productos = require('./api/productos');
 
 
 // creo una app de tipo express
@@ -7,17 +7,19 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post('./api/productos/guardar', (req, res) => {
+app.post('/api/productos/guardar', (req, res) => {
+    productos.guardar(req.body.title, req.body.price, req.body.thumbnail);
     return res.json({ estado: 'GUARDADO' });
 })
 
-app.get('./api/productos/listar', (req, res) => {
-        /* let arrayProductos = productos.getProductos();
-        console.log('esto hay en el array' + arrayProductos) */
-        /* let arrayProductos = productos;
-        console.log(arrayProductos); */
-        let arrayProductos = productos.getProductos();
-        return res.json(arrayProductos);
+app.get('/api/productos/listar/:id', (req, res) => {
+    let id = req.params.id;
+    let producto = productos.listar(id);
+    res.json(producto)
+})
+
+app.get('/api/productos/listar', (req, res) => {
+        return res.json(productos);
 
     })
     // pongo a escuchar el servidor en el puerto indicado

@@ -6,7 +6,7 @@ class Productos {
     guardar(title, price, thumbnail) {
         try {
             this.productos.push({
-                id: productos.length + 1,
+                id: this.productos.length + 1,
                 title: title,
                 price: price,
                 thumbnail: thumbnail
@@ -20,6 +20,11 @@ class Productos {
 
     getProductos() {
         return this.productos;
+    }
+
+    listar(id) {
+        const producto = this.productos.find(producto => producto.id === id);
+        return producto;
     }
 }
 
