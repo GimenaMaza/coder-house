@@ -1,5 +1,5 @@
 const express = require('express');
-const Productos = require('./api/productos');
+const productos = require('./api/productos');
 
 
 // creo una app de tipo express
@@ -19,7 +19,8 @@ app.get('/api/productos/listar/:id', (req, res) => {
 })
 
 app.get('/api/productos/listar', (req, res) => {
-        return res.json(productos);
+        let listado = productos.getProductos();
+        return res.json(listado);
 
     })
     // pongo a escuchar el servidor en el puerto indicado
