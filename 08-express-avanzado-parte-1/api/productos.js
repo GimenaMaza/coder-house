@@ -23,7 +23,7 @@ class Productos {
     }
 
     listar(id) {
-        const producto = this.productos.find(producto => producto.id === id);
+        const producto = this.productos.find(producto => producto.id == id);
         return producto;
     }
 }
