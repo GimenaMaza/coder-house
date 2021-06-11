@@ -26,7 +26,13 @@ class Productos {
         const producto = this.productos.find(producto => producto.id == id);
         return producto;
     }
+
+    /* borrar(id) {
+        const producto = this.productos.find(producto => producto.id == id);
+        let index = this.productos.findIndex(producto);
+        this.productos.splice(index, 1);
+    } */
 }
 
 // exporto una instancia de la clase
-module.exports = new Productos();
+module.exports = Productos;

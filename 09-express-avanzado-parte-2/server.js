@@ -1,39 +1,23 @@
 const express = require('express');
-const productos = require('./api/productos');
+/* const productos = require('./api/productos'); */
+/* const routerProductos = express.Router(); */
 
 
 // creo una app de tipo express
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-app.post('/api/productos/guardar', (req, res) => {
-    productos.guardar(req.body.title, req.body.price, req.body.thumbnail);
-    return res.json({ estado: 'GUARDADO' });
-})
+// protejo el servidor ante cualquier excepcion no atrapada
+app.use((err, req, res, next) => {
+    console.error(err.message);
+    return res.status(500).send('Algo se rompio!');
+});
 
-app.get('/api/productos/listar/:id', (req, res) => {
-    let id = req.params.id;
-    let producto = productos.listar(id);
-    if (producto == null) {
-        res.send({ error: "Producto no encontrado" })
-    } else {
-        res.json(producto)
-    }
-
-})
-
-app.get('/api/productos/listar', (req, res) => {
-        let listado = productos.getProductos();
-        if (listado.length === 0) {
-            res.send({ error: "No hay productos cargados" })
-        } else {
-            return res.json(listado);
-        }
-
-
-    })
-    // pongo a escuchar el servidor en el puerto indicado
+const router = require('./routes/productos');
+app.use('/api/productos', router);
+// pongo a escuchar el servidor en el puerto indicado
 const puerto = 8000;
 
 const server = app.listen(puerto, () => {
@@ -44,3 +28,6 @@ const server = app.listen(puerto, () => {
 server.on('error', error => {
     console.log('error en el servidor:', error);
 });
+
+
+module.exports = server;
