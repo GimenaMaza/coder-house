@@ -40,7 +40,7 @@ router.delete('/borrar/:id', (req, res) => {
 
 })
 
-router.put('/actualizar/:id', (req, res) => {
+/* router.put('/actualizar/:id', (req, res) => {
 
     let id = req.params.id;
     let actualizar = { title: req.body.title, price: req.body.price, thumbnail: req.body.thumbnail }
@@ -53,6 +53,6 @@ router.put('/actualizar/:id', (req, res) => {
     })
 
 
-})
+}) */
 
 module.exports = router;

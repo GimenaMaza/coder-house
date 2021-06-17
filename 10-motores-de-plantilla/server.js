@@ -32,6 +32,9 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.render('index', { productos: data, hayProductos: true });
 });
+app.get('/productos/vista', (req, res) => {
+    res.render('vista', { productos: data, hayProductos: true });
+});
 
 
 const router = require('./routes/productos');
