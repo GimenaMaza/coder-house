@@ -34,10 +34,10 @@ app.get('/', (req, res) => {
 });
 
 
-const router = require('../routes/productos');
+const router = require('./routes/productos');
 app.use('/api/productos', router);
 // pongo a escuchar el servidor en el puerto indicado
-const puerto = 8000;
+const puerto = 4000;
 
 const server = app.listen(puerto, () => {
     console.log(`servidor escuchando en http://localhost:${puerto}`);
