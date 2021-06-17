@@ -32,6 +32,7 @@ class Productos {
         let index = this.productos.findIndex(producto);
         this.productos.splice(index, 1);
     } */
+
 }
 
 // exporto una instancia de la clase

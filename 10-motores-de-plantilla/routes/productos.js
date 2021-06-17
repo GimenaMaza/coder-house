@@ -40,4 +40,19 @@ router.delete('/borrar/:id', (req, res) => {
 
 })
 
+router.put('/actualizar/:id', (req, res) => {
+
+    let id = req.params.id;
+    let actualizar = { title: req.body.title, price: req.body.price, thumbnail: req.body.thumbnail }
+
+    productos = productos.map(p => {
+        if (p.id == id) {
+            p = Object.assign(p, actualizar);
+        }​
+        return p;
+    })
+
+
+})
+
 module.exports = router;
