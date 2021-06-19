@@ -1,55 +1,105 @@
 const express = require('express');
-/* const productos = require('./api/productos'); */
-/* const routerProductos = express.Router(); */
+const products = require('./api/productos');
+const router = express.Router();
 const handlebars = require('express-handlebars');
 
-
-// creo una app de tipo express
+// App Express
 const app = express();
-app.use(express.json());
+
+// Settings
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.json());
 
-// protejo el servidor ante cualquier excepcion no atrapada
-app.use((err, req, res, next) => {
-    console.error(err.message);
-    return res.status(500).send('Algo se rompio!');
-});
-// configuracion de handlebars en express
-app.engine('hbs', handlebars({
-    extname: '.hbs',
-    defaultLayout: 'index.hbs',
-    layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials/'
-}));
-
+app.engine(
+    "hbs",
+    handlebars({
+        extname: ".hbs",
+        defaultLayout: '',
+        layoutsDir: ''
+    })
+);
 app.set('view engine', 'hbs');
+app.set("views", "./views/layouts");
 
-app.set('views', './views');
-
-app.use(express.static('public'));
-
+// Routes
 app.get('/', (req, res) => {
-    res.render('index', { productos: data, hayProductos: true });
-});
+    res.render('index')
+})
+
 app.get('/productos/vista', (req, res) => {
-    res.render('vista', { productos: data, hayProductos: true });
-});
 
+    const items = products.viewAll()
+    console.log(items)
+    if (items.length > 0) {
+        res.render('vista', { items: products.viewAll(), productsExists: true })
+    } else {
+        res.render('vista', { items: products.viewAll(), productsExists: false })
+    }
+})
 
-const router = require('./routes/productos');
-app.use('/api/productos', router);
-// pongo a escuchar el servidor en el puerto indicado
-const puerto = 4000;
+app.use('/api', router);
 
-const server = app.listen(puerto, () => {
-    console.log(`servidor escuchando en http://localhost:${puerto}`);
-});
+router.get('/productos/listar', (req, res) => {
 
-// en caso de error, avisar
-server.on('error', error => {
-    console.log('error en el servidor:', error);
-});
+    const items = products.viewAll()
+    if (items.length > 0) {
+        res.json(items)
+    } else {
+        res.json({
+            error: 'No hay productos cargados'
+        })
+    }
+})
 
+router.get('/productos/listar/:id', (req, res) => {
 
-module.exports = server;
+    const item = products.viewByID(req.params.id)
+
+    if (item) {
+        res.json(item)
+    } else {
+        res.json({
+            error: 'El producto no fue encontrado'
+        })
+    }
+})
+
+router.post('/productos/guardar', (req, res) => {
+
+    products.addProduct(req.body)
+
+    res.redirect('/productos/vista');
+})
+
+router.put('/productos/actualizar/:id', (req, res) => {
+    const item = products.updateProduct(req.params.id, req.body)
+    if (item) {
+        res.json(item)
+    } else {
+        res.json({
+            error: 'El producto no fue encontrado'
+        })
+    }
+})
+
+router.delete('/productos/borrar/:id', (req, res) => {
+    const item = products.deleteProduct(req.params.id)
+
+    if (item) {
+        res.json(item)
+    } else {
+        res.json({
+            error: 'El producto no fue encontrado'
+        })
+    }
+})
+
+// Server
+const PORT = 4000;
+
+const server = app.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${PORT}`)
+})
+server.on('error', (error) => {
+    console.log('Error en el servidor ', error)
+})

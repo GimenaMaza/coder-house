@@ -8,6 +8,7 @@ const router = express.Router();
 const Productos = require('../api/productos');
 const productos = new Productos();
 
+
 router.post('/guardar', (req, res) => {
     productos.guardar(req.body.title, req.body.price, req.body.thumbnail);
     return res.json({ estado: 'GUARDADO' });
@@ -39,6 +40,7 @@ router.delete('/borrar/:id', (req, res) => {
     return res.json({ estado: 'BORRADO' });
 
 })
+
 
 /* router.put('/actualizar/:id', (req, res) => {
 

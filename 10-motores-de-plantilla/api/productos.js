@@ -1,39 +1,52 @@
-class Productos {
+// Product constructor
+class Products {
+
     constructor() {
-        this.productos = [];
+        this.items = []
     }
 
-    guardar(title, price, thumbnail) {
-        try {
-            this.productos.push({
-                id: this.productos.length + 1,
-                title: title,
-                price: price,
-                thumbnail: thumbnail
-            });
-
-
-        } catch (error) {
-            throw error;
+    addProduct(product) {
+        const newItem = {
+            id: this.items.length + 1,
+            ...product
         }
+        this.items.push(newItem)
+        console.log(this.items);
+        return newItem
     }
 
-    getProductos() {
-        return this.productos;
+    viewAll() {
+        return this.items;
     }
 
-    listar(id) {
-        const producto = this.productos.find(producto => producto.id == id);
-        return producto;
+    viewByID(id) {
+        return this.items.find(prod => prod.id === Number(id));
     }
 
-    /* borrar(id) {
-        const producto = this.productos.find(producto => producto.id == id);
-        let index = this.productos.findIndex(producto);
-        this.productos.splice(index, 1);
-    } */
+    updateProduct(id, product) {
+        const productoIndex = this.items.findIndex(p => p.id == id)
+        if (productoIndex === -1) {
+            throw new Error('producto no encontrado')
+        }
+        const productoActualizado = {
+            id: id,
+            title: product.title,
+            price: product.price,
+            thumbnail: product.thumbnail
+        }
+
+        this.items[productoIndex] = productoActualizado;
+
+        return productoActualizado
+    }
+
+    deleteProduct(id) {
+        const itemToDelete = this.items.find(prod => prod.id === Number(id));
+
+        this.items.splice(itemToDelete.id - 1, 1);
+        return itemToDelete;
+    }
 
 }
 
-// exporto una instancia de la clase
-module.exports = Productos;
+module.exports = new Products()
