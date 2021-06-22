@@ -1,0 +1,28 @@
+<%- include('./encabezado')-%>
+
+    <body>
+        <div class="container mt-3">
+            <div class="jumbotron">
+                <h1 style="color:blue;">Ingrese producto</h1>
+                <br>
+
+                <form action="api/productos/guardar" method="post">
+
+                    <div class="form-group">
+                        <label for="Title"><b>Nombre</b></label>
+                        <input id="title" class="form-control" type="text" name="title">
+                        <label for="Price"><b>Precio</b></label>
+                        <input id="price" class="form-control" type="number" name="price">
+                        <label for="Thumbnail"><b>Foto</b></label>
+                        <input id="thumbnail" class="form-control" type="text" name="thumbnail">
+                    </div>
+                    <button class="btn btn-success mt-3 mb-5">Save</button>
+                </form>
+
+                <h2 style="color:crimson;">Historial</h2>
+                <%- include('./tabla') -%>
+            </div>
+        </div>
+    </body>
+
+    </html>
