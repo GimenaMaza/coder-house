@@ -3,21 +3,21 @@ block partial
     body 
         div(class="container mt-3")
             div(class="jumbotron")
-                h1(style="color:blue;")="Ingrese datos"
+                h1(style="color:blue;")="Ingrese producto"
                 br
 
                 form(action="/api/productos/guardar" method="post")
                     div(class="form-group")
                         label(for="title")
-                        b="Title"
+                        b="Nombre"
                         input(class="form-control" type="text" name="title")
                         label(for="price")
-                        b="Price"
+                        b="Precio"
                         input(class="form-control" type="number" name="price")
                         label(for="thumbnail")
-                        b="thumbnail"
+                        b="Foto"
                         input(class="form-control" type="text" name="thumbnail")                      
-                        button(class="btn btn-success mt-3 mb-5")="Enviar"
+                        button(class="btn btn-success mt-3 mb-5")="Guardar"
 
             h2(style="color:crimson;")="Historial"
             block tabla
