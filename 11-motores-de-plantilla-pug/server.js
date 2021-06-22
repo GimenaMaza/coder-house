@@ -6,6 +6,10 @@ const handlebars = require('express-handlebars');
 // App Express
 const app = express();
 
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 // Settings
 
 app.set('views', './views');
@@ -15,11 +19,11 @@ app.set('view engine', 'pug');
 // Routes
 app.get('/', (req, res) => {
     const productos = products.viewAll()
-    console.log(productos)
+    console.log('productos', productos)
     if (productos.length > 0) {
-        res.render('formulario', { productos: products.viewAll(), productsExists: true })
+        res.render('tabla', { productos: products.viewAll(), productsExists: true })
     } else {
-        res.render('formulario', { productos: products.viewAll(), productsExists: false })
+        res.render('tabla', { productos: products.viewAll(), productsExists: false })
     }
 })
 
@@ -51,10 +55,8 @@ router.get('/productos/listar/:id', (req, res) => {
 })
 
 router.post('/productos/guardar', (req, res) => {
-
-    products.addProduct(req.body)
-
-    res.redirect('/productos/vista');
+    products.addProduct(req.body);
+    res.redirect('/');
 })
 
 router.put('/productos/actualizar/:id', (req, res) => {

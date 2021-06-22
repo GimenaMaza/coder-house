@@ -6,8 +6,7 @@ block partial
                 h1(style="color:blue;")="Ingrese datos"
                 br
 
-                    form(action="/api/productos/guardar" method="post")
-
+                form(action="/api/productos/guardar" method="post")
                     div(class="form-group")
                         label(for="title")
                         b="Title"
@@ -19,5 +18,6 @@ block partial
                         b="thumbnail"
                         input(class="form-control" type="text" name="thumbnail")                      
                         button(class="btn btn-success mt-3 mb-5")="Enviar"
-                h2(style="color:crimson;")="Historial"
-block tabla
+
+            h2(style="color:crimson;")="Historial"
+            block tabla

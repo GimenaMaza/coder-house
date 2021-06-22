@@ -1,16 +1,18 @@
+extends formulario
+
 block tabla 
-if productsExists 
-    div(class="table-responsive")
-        table(class="table table-dark")
-            tr(style="color: yellow;")
-                th Title
-                th Price
-                th Thumbnail
-            tr
-            each productos
-            tr
-            td=producto.title
-            td=producto.price
-            td=producto.thumbnail
-else
-    h3(class="alert alert-danger")
+    if productsExists 
+        div(class="table-responsive")
+            table(class="table table-dark")
+                tr(style="color: yellow;")
+                    th='Title'
+                    th='Price'
+                    th='Thumbnail'
+                tr
+                each producto in productos
+                    tr
+                        td=producto.title
+                        td=producto.price
+                        td=producto.thumbnail
+    else
+        h3(class="alert alert-danger")='No se encontraron productos'
