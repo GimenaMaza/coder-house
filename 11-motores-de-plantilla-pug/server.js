@@ -29,58 +29,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', router);
 
-router.get('/productos/listar', (req, res) => {
 
-    const items = products.viewAll()
-    if (items.length > 0) {
-        res.json(items)
-    } else {
-        res.json({
-            error: 'No hay productos cargados'
-        })
-    }
-})
-
-router.get('/productos/listar/:id', (req, res) => {
-
-    const item = products.viewByID(req.params.id)
-
-    if (item) {
-        res.json(item)
-    } else {
-        res.json({
-            error: 'El producto no fue encontrado'
-        })
-    }
-})
-
-router.post('/productos/guardar', (req, res) => {
-    products.addProduct(req.body);
-    res.redirect('/');
-})
-
-router.put('/productos/actualizar/:id', (req, res) => {
-    const item = products.updateProduct(req.params.id, req.body)
-    if (item) {
-        res.json(item)
-    } else {
-        res.json({
-            error: 'El producto no fue encontrado'
-        })
-    }
-})
-
-router.delete('/productos/borrar/:id', (req, res) => {
-    const item = products.deleteProduct(req.params.id)
-
-    if (item) {
-        res.json(item)
-    } else {
-        res.json({
-            error: 'El producto no fue encontrado'
-        })
-    }
-})
 
 // Server
 const PORT = 4000;

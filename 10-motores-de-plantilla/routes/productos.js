@@ -15,12 +15,13 @@ router.post('/guardar', (req, res) => {
 })
 
 router.get('/listar/:id', (req, res) => {
-    let id = req.params.id;
-    let producto = productos.listar(id);
-    if (producto == null) {
-        res.send({ error: "Producto no encontrado" })
+    const item = products.updateProduct(req.params.id, req.body)
+    if (item) {
+        res.json(item)
     } else {
-        res.json(producto)
+        res.json({
+            error: 'El producto no fue encontrado'
+        })
     }
 
 })
