@@ -15,7 +15,7 @@ app.engine(
     "hbs",
     handlebars({
         extname: ".hbs",
-        defaultLayout: 'index.hbs',
+        defaultLayout: 'vista.hbs',
     })
 );
 
@@ -57,7 +57,7 @@ router.get('/productos/listar/:id', (req, res) => {
 
 router.post('/productos/guardar', (req, res) => {
     items.guardar(req.body);
-    /* res.redirect('/'); */
+    res.redirect('/');
     console.log(items);
 })
 
