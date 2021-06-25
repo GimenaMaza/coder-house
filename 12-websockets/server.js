@@ -57,7 +57,8 @@ router.get('/productos/listar/:id', (req, res) => {
 
 router.post('/productos/guardar', (req, res) => {
     items.guardar(req.body);
-    res.redirect('/');
+    /* res.redirect('/'); */
+    console.log(items);
 })
 
 router.put('/productos/actualizar/:id', (req, res) => {
@@ -96,10 +97,10 @@ router.get('/productos/vista', (req, res) => {
 
 io.on('connection', socket => {
     console.log("¡Nuevo cliente conectado!");
-    socket.emit('productos', productos.get());
+    socket.emit('productos', items.get());
     socket.on('update', data => {
         if (data = 'ok') {
-            io.sockets.emit('productos', productos.get());
+            io.sockets.emit('productos', items.get());
         }
     })
 
